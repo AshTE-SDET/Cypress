@@ -32,6 +32,17 @@ describe('Login Functionality', function() {
         myinfoElements.drop();
         myinfoElements.savebtn();
         myinfoElements.sucessmsgvalidation();
+        myinfoElements.documentupload();
+        myinfoElements.browserbtnclick();
+        myinfoElements.filesavebtn();
+    
+
+
+
+
+
+
+
     });
 
 })

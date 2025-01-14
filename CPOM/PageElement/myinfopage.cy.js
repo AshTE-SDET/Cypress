@@ -5,6 +5,8 @@ import { NineDigitNumber } from "../PageActions/number.cy"; // Import the functi
 const randomValue1 = NineDigitNumber(); // Call the function to get a random value
 import { CurrentDate } from "../PageActions/number.cy";
 const currentDate = CurrentDate();
+import  "cypress-file-upload";
+const filename = 'example.json';
 
 export class myinfo{
 
@@ -20,15 +22,20 @@ export class myinfo{
     expdate_field=':nth-child(2) > .oxd-input-group > :nth-child(2) > .oxd-date-wrapper > .oxd-date-input > .oxd-input'
     d_obicon=':nth-child(1) > .oxd-input-group > :nth-child(2) > .oxd-date-wrapper > .oxd-date-input > .oxd-icon'
     d_obfield=':nth-child(1) > .oxd-input-group > :nth-child(2) > .oxd-date-wrapper > .oxd-date-input > .oxd-input'
-    
     gender=':nth-child(2) > :nth-child(2) > .oxd-radio-wrapper > label > .oxd-radio-input'
     dd=':nth-child(5) > :nth-child(1) > :nth-child(1) > .oxd-input-group > :nth-child(2) > .oxd-select-wrapper > .oxd-select-text'
     form_save=':nth-child(1) > .oxd-form > .oxd-form-actions > .oxd-button'
     sucess_msg='.oxd-toast'
-    
+    attachment_icon='.orangehrm-action-header > .oxd-button'
+    //upload_file = '.oxd-file-button'
+    fileupload_save='.orangehrm-attachment > .orangehrm-card-container > .oxd-form > .oxd-form-actions > .oxd-button--secondary'
+
+
+
+
     infolink(){
 
-        cy.get(this.myinfolink).click()
+        cy.get(this.myinfolink).click().wait(20000);
     }
     firstname(){
         cy.get(this.first_name).clear().type('Aishwarya')
@@ -68,7 +75,7 @@ export class myinfo{
 dobfield(){   
     cy.get(this.d_obfield).then(($input) => {
         $input[0].value='';
-        cy.get(this.d_obfield).click().clear();
+        cy.get(this.d_obfield).click({force:true}).clear();
     }
 )
 }
@@ -92,4 +99,49 @@ savebtn(){
 sucessmsgvalidation(){
     cy.get(this.sucess_msg).should('contain.text', 'SuccessSuccessfully Updated').wait(2000);
 }
+documentupload(){
+    cy.get(this.attachment_icon).click().wait(2000);
+}
+browserbtnclick(){
+    const filepath= 'wpx.png';
+    cy.get('.oxd-file-button').click().wait(2000);
+    cy.get('.oxd-file-button').attachFile(filepath);
+    
+        
+   
+
+}
+filesavebtn(){
+    cy.get(this.fileupload_save).click();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
