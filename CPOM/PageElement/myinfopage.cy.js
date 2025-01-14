@@ -22,8 +22,9 @@ export class myinfo{
     d_obfield=':nth-child(1) > .oxd-input-group > :nth-child(2) > .oxd-date-wrapper > .oxd-date-input > .oxd-input'
     
     gender=':nth-child(2) > :nth-child(2) > .oxd-radio-wrapper > label > .oxd-radio-input'
-    
-    
+    dd=':nth-child(5) > :nth-child(1) > :nth-child(1) > .oxd-input-group > :nth-child(2) > .oxd-select-wrapper > .oxd-select-text'
+    form_save=':nth-child(1) > .oxd-form > .oxd-form-actions > .oxd-button'
+    sucess_msg='.oxd-toast'
     
     infolink(){
 
@@ -67,7 +68,7 @@ export class myinfo{
 dobfield(){   
     cy.get(this.d_obfield).then(($input) => {
         $input[0].value='';
-        //cy.get(this.d_obfield).click().clear();
+        cy.get(this.d_obfield).click().clear();
     }
 )
 }
@@ -78,7 +79,17 @@ dobdate(){
 }
 usergender(){
     cy.get(this.gender).click();
-    cy.get(':nth-child(1) > .oxd-form > .oxd-form-actions > .oxd-button').click();
+    //cy.get(':nth-child(1) > .oxd-form > .oxd-form-actions > .oxd-button').click();
 }
-
+drop(){
+    cy.get(this.dd).click();
+    cy.get('.oxd-select-option').contains('Iranian').click();
+    cy.get(this.dd).should('have.text', 'Iranian'); // Assertion to verify the selected option
+}
+savebtn(){
+    cy.get(this.form_save).click();
+}
+sucessmsgvalidation(){
+    cy.get(this.sucess_msg).should('contain.text', 'SuccessSuccessfully Updated').wait(2000);
+}
 }
