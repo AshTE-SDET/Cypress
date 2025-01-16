@@ -1,13 +1,16 @@
 import { loginPageCypress } from "../../CPOM/PageElement/CLogin.spec.cy"
 import { myinfo } from "../../CPOM/PageElement/myinfopage.cy"
+import {emergencycontacts} from "../../CPOM/PageElement/emergencycontacts.cy"
 const myinfoElements = new myinfo();
 const loginElements = new loginPageCypress();
+const emergencycontactElements = new emergencycontacts();
 describe('Login Functionality', function() {
     
     beforeEach(() => { //Open the login page before each test
         loginElements.visit();
         loginElements.login();
         myinfoElements.infolink();
+        
     
     });
     
@@ -35,14 +38,32 @@ describe('Login Functionality', function() {
         myinfoElements.documentupload();
         myinfoElements.browserbtnclick();
         myinfoElements.filesavebtn();
-    
-
-
-
-
-
-
 
     });
 
-})
+it("Contact Details", function(){
+
+    myinfoElements.contactdetailslink();
+    myinfoElements.address1();
+    myinfoElements.countryincd();
+    myinfoElements.telephonedd();
+    myinfoElements.mail();  
+    myinfoElements.savecontactdetails();
+    myinfoElements.sucessmsgvalidation();
+
+});
+it.only("Emergency Contacts", function(){
+    emergencycontactElements.emergencycontactslink();
+    emergencycontactElements.assigncontactblock();
+    emergencycontactElements.saveemergencyblock();
+    emergencycontactElements.namefield();
+    emergencycontactElements.rltn();
+    emergencycontactElements.homenumber();
+    emergencycontactElements.mobilenumber();
+    emergencycontactElements.worknumber();
+    emergencycontactElements.savebtn();
+    emergencycontactElements.sucessmsgvalidation();
+    emergencycontactElements.deletedata();  
+    emergencycontactElements.deletebox();
+});
+});
